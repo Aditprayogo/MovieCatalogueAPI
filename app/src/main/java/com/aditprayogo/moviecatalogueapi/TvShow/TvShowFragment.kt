@@ -56,7 +56,6 @@ class TvShowFragment : Fragment() {
                 intent.putExtra(DetailMovieActivity.EXTRA_IMAGE, data.photo)
                 intent.putExtra(DetailMovieActivity.EXTRA_RATING, data.rating)
                 startActivity(intent)
-
             }
 
         })

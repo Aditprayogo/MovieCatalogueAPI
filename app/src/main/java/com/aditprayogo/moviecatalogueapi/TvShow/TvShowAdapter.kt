@@ -8,14 +8,12 @@ import com.aditprayogo.moviecatalogueapi.R
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_row_movie.view.*
 
-class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>(){
+class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.ListViewHolder>(){
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
-
         this.onItemClickCallback = onItemClickCallback
-
     }
 
     private val listTvShow = ArrayList<TvShow>()
@@ -26,8 +24,10 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>(){
         notifyDataSetChanged()
     }
 
-    inner class TvShowViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         fun bind(tvShow: TvShow) {
+
             with(itemView) {
                 Glide.with(itemView.context)
                     .load(tvShow.photo)
@@ -45,16 +45,16 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>(){
 
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): TvShowViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val mView = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_row_movie, viewGroup,false)
-        return  TvShowViewHolder(mView)
+        return  ListViewHolder(mView)
     }
 
     override fun getItemCount(): Int {
         return listTvShow.size
     }
 
-    override fun onBindViewHolder(tvShowViewHolder: TvShowViewHolder, position: Int) {
+    override fun onBindViewHolder(tvShowViewHolder: ListViewHolder, position: Int) {
         tvShowViewHolder.bind(listTvShow[position])
     }
 
