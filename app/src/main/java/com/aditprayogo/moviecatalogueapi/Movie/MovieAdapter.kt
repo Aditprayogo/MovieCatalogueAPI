@@ -11,6 +11,14 @@ import kotlinx.android.synthetic.main.item_row_movie.view.*
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
+    private var onItemClickCallback: OnItemClickCallback? = null
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+
+        this.onItemClickCallback = onItemClickCallback
+
+    }
+
     private val listMovie = ArrayList<Movie>()
 
     fun setData(items: ArrayList<Movie>) {
@@ -29,6 +37,10 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
                 txt_title.text = movie.title
                 txt_overview.text = movie.overview
                 txt_rating.text = movie.rating.toString()
+
+                itemView.setOnClickListener{
+                    onItemClickCallback?.onItemClicked(movie)
+                }
             }
         }
 
@@ -45,5 +57,11 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
     override fun onBindViewHolder(movieViewHolder: MovieViewHolder, position: Int) {
         movieViewHolder.bind(listMovie[position])
+    }
+
+    interface OnItemClickCallback {
+
+        fun onItemClicked(data: Movie)
+
     }
 }

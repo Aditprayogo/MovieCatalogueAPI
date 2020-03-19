@@ -1,6 +1,7 @@
 package com.aditprayogo.moviecatalogueapi.Movie
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditprayogo.moviecatalogueapi.DetailMovieActivity
 import com.aditprayogo.moviecatalogueapi.R
 import kotlinx.android.synthetic.main.fragment_movie.*
 
@@ -40,6 +42,20 @@ class MovieFragment : Fragment() {
 
         rv_movie.layoutManager = LinearLayoutManager(context!!.applicationContext)
         rv_movie.adapter = adapter
+
+        adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: Movie) {
+
+                val intent = Intent(context, DetailMovieActivity::class.java)
+                intent.putExtra(DetailMovieActivity.EXTRA_TITLE, data.title)
+                intent.putExtra(DetailMovieActivity.EXTRA_OVERVIEW, data.overview)
+                intent.putExtra(DetailMovieActivity.EXTRA_IMAGE, data.photo)
+                intent.putExtra(DetailMovieActivity.EXTRA_RATING, data.rating)
+                startActivity(intent)
+
+            }
+
+        })
 
         movieViewModel= ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
             .get(MovieViewModel::class.java)
