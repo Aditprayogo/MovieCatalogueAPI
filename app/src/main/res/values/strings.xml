@@ -3,7 +3,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab_text_1">Movies</string>
     <string name="tab_text_2">Tv Show</string>
-    <string name="overview">Gambaran :</string>
-    <string name="change_language_settings">Ubah Pengaturan bahasa</string>
-    <string name="rating">Peringkat</string>
+    <string name="overview">Overview :</string>
+    <string name="change_language_settings">Change Language Settings</string>
+    <string name="rating">Rating</string>
 </resources>

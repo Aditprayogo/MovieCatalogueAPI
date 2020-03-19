@@ -15,6 +15,7 @@ class SectionsPagerAdapter(private val mContext: Context, fm: FragmentManager) :
     private val TAB_TITLES = intArrayOf(R.string.tab_text_1, R.string.tab_text_2)
 
     override fun getItem(position: Int): Fragment {
+
         var fragment: Fragment? = null
         when (position) {
             0 -> fragment =

@@ -2,9 +2,12 @@ package com.aditprayogo.moviecatalogueapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.aditprayogo.moviecatalogueapi.Movie.Movie
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_detail_movie.*
+import kotlinx.android.synthetic.main.activity_detail_movie.progressBar
+import kotlinx.android.synthetic.main.fragment_movie.*
 import kotlinx.android.synthetic.main.item_row_movie.*
 
 class DetailMovieActivity : AppCompatActivity() {
@@ -20,11 +23,22 @@ class DetailMovieActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_movie)
 
-        Glide.with(this).load(intent.getStringExtra(EXTRA_IMAGE)).into(iv_image)
-        tv_title.setText(intent.getStringExtra(EXTRA_TITLE))
-        tv_overview.setText(intent.getStringExtra(EXTRA_OVERVIEW))
-        tv_rating.text = intent.getFloatExtra(EXTRA_RATING, 0F).toString()
+        showLoading(true)
 
+        if (intent.getStringExtra(EXTRA_TITLE).isNotEmpty()) {
+            showLoading(false)
+            Glide.with(this).load(intent.getStringExtra(EXTRA_IMAGE)).into(iv_image)
+            tv_title.setText(intent.getStringExtra(EXTRA_TITLE))
+            tv_overview.setText(intent.getStringExtra(EXTRA_OVERVIEW))
+            tv_rating.text = intent.getFloatExtra(EXTRA_RATING, 0F).toString()
+        }
+    }
 
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            progressBar!!.visibility = View.VISIBLE
+        } else {
+            progressBar!!.visibility = View.GONE
+        }
     }
 }
